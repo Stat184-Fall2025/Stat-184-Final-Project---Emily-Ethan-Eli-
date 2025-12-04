@@ -1,0 +1,72 @@
+# ---- Load Packages ----
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(lubridate)
+library(readxl)
+
+
+#  Load the USDA Food Price Outlook Dataset
+
+
+# If it is a CSV file, use read_csv:
+df <- read_csv("CPIForecast)
+
+# ------------------------------------------------------------
+ Inspect data structure
+# ------------------------------------------------------------
+glimpse(df)
+
+# Many USDA datasets have separate columns for food categories
+# plus a "Year" column. Let's assume structure like:
+# Year | Food | Food-at-Home | Food-away-from-Home | Meats | Dairy | ...
+
+# ------------------------------------------------------------
+ Turn data into long format for easier plotting
+# ------------------------------------------------------------
+
+df_long <- df %>%
+  pivot_longer(
+    cols = -Year,
+    names_to = "Category",
+    values_to = "Price_Index"
+    )
+
+# ------------------------------------------------------------
+ Plot price trends over time
+# ------------------------------------------------------------
+ggplot(df_long, aes(x = Year, y = Price_Index, color = Category)) +
+  geom_line(size = 1.2) +
+  labs(
+    title = "USDA Food Price Trends Over Time",
+    x = "Year",
+    y = "Price Index (CPI)",
+    color = "Food Category"
+  ) +
+  theme_minimal(base_size = 14)
+
+# ------------------------------------------------------------
+Calculate Annual Percent Increase for Each Category
+# ------------------------------------------------------------
+
+df_pct <- df_long %>%
+  group_by(Category) %>%
+  arrange(Year) %>%
+  mutate(Pct_Change = (Price_Index - lag(Price_Index)) / lag(Price_Index) * 100)
+
+# Print last few results:
+tail(df_pct)
+
+# ------------------------------------------------------------
+Plot annual percent increase
+# ------------------------------------------------------------
+ggplot(df_pct, aes(x = Year, y = Pct_Change, color = Category)) +
+  geom_line(size = 1.1) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(
+    title = "Annual Percent Change in U.S. Food Prices",
+    x = "Year",
+    y = "Percent Change (%)"
+  ) +
+  theme_minimal(base_size = 14)
