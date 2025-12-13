@@ -1,0 +1,53 @@
+# ----- Table Code ----- #
+
+# ----- Tided Data Table ----- #
+cpi_tidy <- CPIHistoricalForecast %>%  # Tidying the datset to show Consumer Price Index Item (only showing "Meats", "Fruits and vegetables", and "Dairy products"), Year of Forecast, and Forecast Percent Change
+  clean_names() %>% 
+  # use only mid-point forecasts
+  filter(attribute == "Mid point of prediction interval") %>% 
+  # keep only the desired CPI items
+  filter(
+    consumer_price_index_item %in% c(
+      "Meats",
+      "Fruits and vegetables",
+      "Dairy products"
+    )
+  ) %>%
+  select(
+    consumer_price_index_item,
+    year_of_forecast,
+    year_being_forecast,
+    forecast_percent_change
+  )
+
+
+kable(cpi_tidy[1:50,],caption = "Year vs Forecast Percent Change for Each CPI Item") # Viewing tidied dataset
+
+
+# ----- Table Showing Mean and Standard Deviation of CPI Forecasted Percent Change by Food Category and Year ----- #
+cpi_summary <- cpi_tidy %>%
+  group_by(consumer_price_index_item, year_being_forecast) %>%
+  summarise(
+    mean_forecast_pct_change = mean(forecast_percent_change, na.rm = TRUE),
+    sd_forecast_pct_change   = sd(forecast_percent_change, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+kable(cpi_summary,
+      caption = "Mean and Standard Deviation of CPI Forecasted Percent Change by Food Category and Year")
+
+
+# ----- Min/Max Forecasted Percent Change For Each Food Category ----- #
+cpi_range_table <- cpi_tidy %>%
+  group_by(consumer_price_index_item) %>%
+  summarise(
+    min_forecast_pct_change = min(forecast_percent_change, na.rm = TRUE),
+    max_forecast_pct_change = max(forecast_percent_change, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+kable(
+  cpi_range_table,
+  digits = 2,
+  caption = "Minimum and Maximum Values For CPI Forecasted Percent Change by Food Category"
+)
