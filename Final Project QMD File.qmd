@@ -171,7 +171,7 @@ ggplot(
      ) +
      theme_minimal()
 ```
-#### Figure 2 Analysis: Figure 2 shows the forecasted CPI precent changes for meats, fruits and vegetables and dairy produts. As you can see, there's big spikes for meats around 2004 and 2019, and a spike increase for fruits,vegetables, and dairy prodcuts in 2022. This shows howthe forecasted precent change affected the price of these products over time.
+#### Figure 2 Analysis: Figure 2 shows the forecasted CPI precent changes for meats, fruits and vegetables and dairy produts. As you can see, there's big spikes for meats around 2004 and 2019, and a spike increase for fruits,vegetables, and dairy prodcuts in 2022. This shows how the forecasted precent change affected the price of these products over time.
 
 
 
@@ -518,4 +518,5 @@ ggplot(cpi_mean,
   ) +
   theme_minimal()
 ```
+
 
