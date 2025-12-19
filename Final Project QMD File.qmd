@@ -3,6 +3,8 @@ echo: false
 title: "Evaluation of CPI Predictions for Meats, Dairy Products, and Fruits and Vegetables from 2004 - 2025"
 format: html
 editor: visual
+bibliography: references.json
+csl: agricultural-and-food-economics.csl
 ---
 
 # Introduction:
@@ -617,3 +619,4 @@ ggplot(cpi_mean,
   ) +
   theme_minimal()
 ```
+
