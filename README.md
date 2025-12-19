@@ -8,9 +8,11 @@ Because the USDA is a reputable federal agency that follows standardized data co
 Research Question
 
 **Research Question** 
+
 How do USDA forecasts of Consumer Price Index (CPI) percent changes differ over time across major food categories—Meats, Fruits and Vegetables, and Dairy Products—and what patterns or trends emerge in these forecasts from 2004 to 2024?
 
 **Data Provenance:**
+
 The data set used in this analysis, CPI Historical Forecast, originates from the United States Department of Agriculture - USDA. The USDA regularly publishes CPI forecasts for various food categories as part of its economic research and outlook reports. These forecasts are widely used by policymakers, economists, and researchers to anticipate inflationary pressures in food markets. The data includes multiple forecast attributes, such as year of forecast and year being forecast. Year of forecast is the year the predicted CPI percent change was created, and year being forecast is when they predict the change to occur. Since the USDA is a reputable federal agency that follows standardized data collection, the data are considered authoritative, reliable, and suitable for economic analysis.
 
 **FAIR and CARE Principles: The dataset largely satisfies the FAIR principles:**
